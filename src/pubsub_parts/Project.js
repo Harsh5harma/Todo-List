@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-const ListItem = require('./listItem');
+import ListItem from "./listItem.js";
 
 // const myClass = new ListItem('lola', 'bunny', '12/12/23', 'high');
 

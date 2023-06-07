@@ -15,3 +15,7 @@ Events:
 List Item Creation
 List Item Edited (title, description, dueDate, priority)
 List Item Deleted
+
+Project Item Creation
+Project Edited (event needs to bubble up from the list event)
+Project Deleted
