@@ -82,9 +82,70 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.227);
   margin-right:10px;
 }
-.statusBtn:hover,.dueDate:hover,.editTask:hover,.sortImg:hover,.plus:hover{
+.statusBtn:hover,.dueDate:hover,.editTask:hover,.sortImg:hover,.plus:hover,
+.pickDate:hover,.flag:hover{
   background-color: rgba(184, 182, 182, 0.268);
 }
 .dueDate,.sortImg{
   margin-right:16px
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+.taskForm{
+  display: flex;
+  width: 100%;
+  border: 1px solid rgba(174, 174, 174, 1);
+  border-radius: 10px;
+}
+.tname{
+  border:0px;
+  padding-left:16px;
+  color:rgba(109, 109, 109, 1);
+  font-size:20px;
+}
+.taskdesc{
+  padding-left:16px;
+  resize:none;
+  border:0px;
+  color: rgba(109, 109, 109, 1); 
+  font-size: 16px;
+  line-height: 19px;
+}
+.formFooter{
+  padding-left:16px;
+  padding-top:10px;
+  padding-right:16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(174, 174, 174, 1);
+}
+.imgDivs{
+  display: flex;
+  justify-content: space-between;
+  width:67px;
+}
+.btnDivs{
+  width: 206px;
+  display: flex;
+  justify-content: space-between;
+  font-size:16px;
+}
+.cancelBtn, .addtaskBtn{
+  width:95px;
+  height:24px;
+  border-radius: 5px;
+  border: 0px;
+  font-weight: 600;
+}
+.cancelBtn{
+  background-color: rgba(248, 96, 96, 0.51);
+  color:white;
+}
+.taskdesc:focus,.tname:focus{
+  outline: 0px;     
 }
