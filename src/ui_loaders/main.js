@@ -1,27 +1,27 @@
 /* eslint-disable require-jsdoc */
-import Sort from '../images/sort.svg';
+import Plus from '../images/plus.svg';
 import imageNode from '../common_Assets/imageNode';
 import taskNode from '../common_Assets/taskNode';
 import taskFormNode from '../common_Assets/taskFormNode';
+import projectHeader from '../common_Assets/projectHeaderNode';
+
 function mainLoader(main) {
-  const mainTitle = document.createElement('div');
-  mainTitle.className = 'mainTitle';
-  mainTitle.append(document.createTextNode('Default'));
-  const sortBtn = document.createElement('div');
-  sortBtn.className = 'sortBtn';
-  const sortImg = imageNode(Sort, 'sortImg');
-  sortBtn.appendChild(sortImg);
-  sortBtn.appendChild(document.createTextNode('Sort by priority'));
-  mainTitle.appendChild(sortBtn);
-  main.appendChild(mainTitle);
-  main.appendChild(taskFormNode());
-  /*
-  const taskList = document.createElement('div');
-  taskList.className ='taskList';
-  const defaultTask = document.createElement('div');
-  defaultTask.className = 'defaultTask';
-  taskList.appendChild(defaultTask);
-  */
+  const defaultTitle = projectHeader('Default');
+  const taskContainer = document.createElement('div');
+  taskContainer.classList.add('taskContainer');
+  taskContainer.className = 'taskContainer';
+
+  const defaultTask = taskNode('Default');
+  const task2 = taskNode('task2');
+  const tform = taskFormNode();
+  taskContainer.append(defaultTask, task2, tform);
+
+  const addNewTask = document.createElement('div');
+  addNewTask.className = 'addnewtask';
+  const addtaskImg = imageNode(Plus, 'addtaskImg');
+  addNewTask.append(addtaskImg, document.createTextNode('Add Task'));
+
+  main.append(defaultTitle, taskContainer, addNewTask);
 }
 
 export {mainLoader};
