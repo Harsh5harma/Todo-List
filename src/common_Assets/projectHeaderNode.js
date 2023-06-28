@@ -11,6 +11,9 @@ export default function projectHeader(title) {
   const sortImg = imageNode(Sort, 'sortImg');
 
   sortBtn.append(sortImg, document.createTextNode('Sort by priority'));
-  header.append(document.createTextNode(title), sortBtn);
+  const tNode = document.createElement('div');
+  tNode.className='projNameText';
+  tNode.textContent = title;
+  header.append(tNode, sortBtn);
   return header;
 }

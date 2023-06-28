@@ -14,8 +14,6 @@ function mainLoader(main) {
   const defaultTask = taskNode('Default');
   const task2 = taskNode('task2');
   const tform = taskFormNode();
-  taskContainer.append(defaultTask, task2, tform);
-
   const addNewTask = document.createElement('div');
   addNewTask.className = 'addnewtask';
   const addtaskImg = imageNode(Plus, 'addtaskImg');

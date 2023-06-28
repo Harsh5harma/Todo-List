@@ -1,5 +1,6 @@
 *{
   margin: 0px;
+ 
 }
 body{
   display: grid;
@@ -166,4 +167,26 @@ body{
 }
 .taskdesc:focus,.tname:focus{
   outline: 0px;     
+}
+
+.pNames{
+  margin-top:64px;
+  font-size:24px;
+  padding-left: 16px;
+  padding-right: 20px;
+}
+
+.pdiv{
+  display: flex;
+  align-items: center;
+  height:40px;
+  padding-left: 16px;
+  overflow:auto;
+}
+.pdiv:hover{
+  background-color: rgba(184, 182, 182, 0.268);
+  border-radius: 5px;
+}
+.pdiv:focus{
+  background-color: rgba(184, 182, 182, 0.268);
 }

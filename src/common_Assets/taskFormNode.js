@@ -27,8 +27,10 @@ export default function taskFormNode() {
   const btnDivs = document.createElement('div');
   btnDivs.classList.add('btnDivs');
   const cancelBtn = document.createElement('button');
+  cancelBtn.type = 'button';
   cancelBtn.textContent = 'Cancel';
   const addtaskBtn = document.createElement('button');
+  addtaskBtn.type = 'button';
   cancelBtn.classList.add('cancelBtn');
   addtaskBtn.textContent = 'Add Task';
   addtaskBtn.classList.add('addtaskBtn');

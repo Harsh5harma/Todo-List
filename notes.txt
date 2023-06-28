@@ -1,21 +1,27 @@
-Title, description, dueDate, priority. Notes or Checklist (optional)
-
-Projects
-- list of todos 
-
-Users should be able to create new projects and choose which project their todos go into.
-Keep App logic and DOM logic different and in different modules.
-
-Make sure your app doesn’t crash if the data you may want retrieve from localStorage isn’t there!
-Storage.setItem();
-Storage.getItem();
+On load -> load default project
 
 
-Events:
-List Item Creation
-List Item Edited (title, description, dueDate, priority)
-List Item Deleted
+onCircleClick -> remove the taskNode all together
+on pencilClick-> create form and populate it with the respective task's JSON data file
 
-Project Item Creation
-Project Edited (event needs to bubble up from the list event)
-Project Deleted
+
+onProjectPlusClick -> {
+  create a JSON file containing all the JSON files of all tasks in that project
+  clear the first 2 divs of the mainArea section
+  append project title to the sidebar after filling in a name form
+  populate the first div of the mainArea with the title
+}
+
+
+onProjectSwitch-> {
+  unpack all JSON data and create the correct number of tasks
+  change the first div of the mainArea
+  append all these tasks to the taskContainer 
+}
+
+
+Questions:
+1) How to update changes in localStorage?
+
+todo:
+restore tasks on project onProjectSwitch

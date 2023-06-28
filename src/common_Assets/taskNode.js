@@ -3,10 +3,10 @@
 import Calendar from '../images/calendar.svg';
 import Edit from '../images/edit.svg';
 import imageNode from './imageNode';
-export default function taskNode(tname) {
+export default function taskNode(tname, tdesc = '') {
   const task = document.createElement('div');
   task.classList.add('task');
-
+  
   const imgAction = document.createElement('div');
   imgAction.className = 'imgAction';
 
