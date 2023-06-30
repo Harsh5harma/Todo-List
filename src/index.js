@@ -54,6 +54,8 @@ const taskContainer = document.querySelector('.taskContainer');
 taskContainer.addEventListener('click', (e)=> {
   if (e.target.matches('.statusBtn')) {
     events.publish('deleteTask', e);
+  } else if (e.target.matches('.editTask')) {
+    events.publish('editTask', e);
   }
 });
 const projContainer = document.querySelector('.pNames');

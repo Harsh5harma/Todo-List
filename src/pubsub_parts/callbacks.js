@@ -61,9 +61,67 @@ const addTaskHandler = ()=> {
     });
   }
 };
+
 const deleteTaskHandler = (e) => {
+  const deletedNode = e.target.parentElement.parentElement;
+  const taskContainer = document.querySelector('.taskContainer');
+  const childNodes = taskContainer.childNodes;
+  let j = 0;
+  const currProject = JSON.parse(localStorage.getItem('existingProjects'))[projectIndex];
+  for (let i = 0; i< childNodes.length; i++) {
+    const childNode = childNodes[i];
+    if (childNode=== deletedNode) {
+      currProject.tasks.splice(i, 1);
+      console.log('in deleted Node');
+      continue;
+    }
+    currProject.tasks[j].taskIndex = j;
+    console.log(j);
+    j++;
+  }
+  existingProjects[projectIndex] = currProject;
+  localStorage.setItem('existingProjects', JSON.stringify(existingProjects));
   e.target.parentElement.parentElement.remove();
 };
+
+const editTaskHandler = (e) => {
+  const editedNode = e.target.parentElement.parentElement;
+  const taskContainer = document.querySelector('.taskContainer');
+  const childNodes = taskContainer.childNodes;
+  let taskIndex;
+
+  for (let i = 0; i< childNodes.length; i++) {
+    const childNode = childNodes[i];
+    if (childNode === editedNode) {
+      taskIndex = i;
+      console.log('in edited Node');
+      break;
+    }
+  }
+  const target = existingProjects[projectIndex].tasks[taskIndex];
+  const editForm = taskFormNode([target.title, target.description]);
+  taskContainer.appendChild(editForm);
+
+  const cancelBtn = document.querySelector('.cancelBtn');
+  cancelBtn.addEventListener('click', ()=> {
+    editForm.remove();
+    taskFormFlag = false;
+  });
+  const addTaskBtn = document.querySelector('.addtaskBtn');
+  addTaskBtn.addEventListener('click', ()=> {
+    taskFormFlag = true;
+    const inputName = document.querySelector('.tname').value;
+    const inputDesc = document.querySelector('.taskdesc').value;
+    const task = new Task(inputName, inputDesc, pi, ti);
+    const tnode = taskNode(task.title);
+    // taskContainer.replaceChild(task, editedNode);
+    taskContainer.replaceChild(tnode, editedNode);
+    existingProjects[projectIndex].tasks[taskIndex] = task;
+    localStorage.setItem('existingProjects', JSON.stringify(existingProjects));
+    editForm.remove();
+  });
+};
+
 const addProjectHandler = ()=> {
   pi++;
   projectIndex = pi;
@@ -103,4 +161,5 @@ export {
   addProjectHandler,
   projSwitchHandler,
   deleteTaskHandler,
+  editTaskHandler,
 };

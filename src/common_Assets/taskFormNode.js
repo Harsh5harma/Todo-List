@@ -2,7 +2,7 @@
 import imageNode from './imageNode';
 import Calendar from '../images/calendar.svg';
 import Flag from '../images/flag.svg';
-export default function taskFormNode() {
+export default function taskFormNode(payload = '') {
   const taskForm = document.createElement('div');
   taskForm.classList.add('taskForm');
 
@@ -12,12 +12,16 @@ export default function taskFormNode() {
 
   const tname = document.createElement('input');
   tname.classList.add('tname');
+
   tname.placeholder='Task Name';
 
   const taskdesc = document.createElement('textarea');
   taskdesc.classList.add('taskdesc');
   taskdesc.placeholder='Description';
-
+  if (payload!='') {
+    tname.defaultValue = payload[0];
+    taskdesc.defaultValue = payload[1];
+  }
   const imgDivs = document.createElement('div');
   imgDivs.classList.add('imgDivs');
   const pickDate = imageNode(Calendar, 'pickDate');
