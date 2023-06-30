@@ -6,7 +6,6 @@ import imageNode from './imageNode';
 export default function taskNode(tname, tdesc = '') {
   const task = document.createElement('div');
   task.classList.add('task');
-  
   const imgAction = document.createElement('div');
   imgAction.className = 'imgAction';
 

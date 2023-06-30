@@ -1,14 +1,38 @@
+/* eslint-disable max-len */
+/* eslint-disable require-jsdoc */
 import taskFormNode from '../common_Assets/taskFormNode';
 import taskNode from '../common_Assets/taskNode';
 import projectNode from '../common_Assets/projectNode';
 import projectHeader from '../common_Assets/projectHeaderNode';
 let pi = 0;
 let ti = 0;
-let existingTasks = [];
+// const existingTasks = [];
 const existingProjects = [];
-let id = 1;
 let taskFormFlag = false;
+let projectIndex = 0;
 
+
+class Task {
+  constructor(title, description, projectIndex, taskIndex) {
+    this.title = title;
+    this.description = description;
+    this.projectIndex = projectIndex;
+    this.taskIndex = taskIndex;
+  }
+}
+class Project {
+  constructor(projectIndex, tasks) {
+    this.projectIndex = projectIndex;
+    this.tasks = tasks;
+  }
+}
+function makeDefaultProj() {
+  if (pi==0) {
+    existingProjects.push(new Project(pi, []));
+    console.log('added default proj');
+  }
+};
+makeDefaultProj();
 const addTaskHandler = ()=> {
   if (!taskFormFlag) {
     const taskContainer = document.querySelector('.taskContainer');
@@ -25,48 +49,38 @@ const addTaskHandler = ()=> {
     addTaskBtn.addEventListener('click', ()=> {
       const inputName = document.querySelector('.tname').value;
       const inputDesc = document.querySelector('.taskdesc').value;
-      const formObj = {
-        'index': ti,
-        'taskName': inputName,
-        'taskDesc': inputDesc,
-      };
+      const task = new Task(inputName, inputDesc, pi, ti);
+      existingProjects[projectIndex].tasks.push(task);
       ti++;
-      existingTasks.push(JSON.stringify(formObj));
-      localStorage.setItem('existingTasks', JSON.stringify(existingTasks));
+      localStorage.setItem('existingProjects', JSON.stringify(existingProjects));
       // console.log(JSON.parse(localStorage.getItem('existingTasks')));
-      const tnode = taskNode(formObj.taskName);
+      const tnode = taskNode(task.title);
       newTask.remove();
       taskFormFlag = false;
       taskContainer.appendChild(tnode);
     });
   }
 };
-
+const deleteTaskHandler = (e) => {
+  e.target.parentElement.parentElement.remove();
+};
 const addProjectHandler = ()=> {
+  pi++;
+  projectIndex = pi;
+  existingProjects.push(new Project(pi, []));
   const projContainer = document.querySelector('.pNames');
   const main = document.querySelector('.main');
   const mainTitle = document.querySelector('.mainTitle');
-  const newProj = projectNode(`Default${id}`);
-  newProj.classList.add(`${id}`);
-  const newProjHeader = projectHeader(`Default${id}`);
-  id++;
-  // get the data in current project
-  const currentProjTasks = localStorage.getItem('existingTasks');
-  const projObj = {
-    'index': pi,
-    'name': `Project${pi}`,
-    'taskList': currentProjTasks,
-  };
-  pi++;
+  const newProj = projectNode(`Default${pi}`);
+  newProj.classList.add(`${pi}`);
+  const newProjHeader = projectHeader(`Default${pi}`);
+  const projNameText = document.querySelector('.projNameText');
+  projNameText.classList.add(pi);
   ti = 0;
-  existingProjects.push(JSON.stringify(projObj));
-  localStorage.setItem('existingProjects', JSON.stringify(existingProjects));
-  existingTasks = [];
   // now replace sidebar and main area
   const taskContainer = document.querySelector('.taskContainer');
   taskContainer.replaceChildren();
   main.replaceChild(newProjHeader, mainTitle);
-
   // now add the new projectTitle
   projContainer.append(newProj);
 };
@@ -76,12 +90,11 @@ const projSwitchHandler = (data)=> {
   const taskContainer = document.querySelector('.taskContainer');
   projNameText.textContent = data[0].value;
   taskContainer.replaceChildren();
-  const index = parseInt(data[1].currentTarget.classList[2]);
-  const temp = JSON.parse(localStorage.getItem('existingProjects'))[index];
-  const currTasks = JSON.parse(JSON.parse(temp).taskList);
-  // console.log(currTasks);
-  currTasks.forEach((element) => {
-    taskContainer.appendChild(taskNode(JSON.parse(element).taskName));
+  projectIndex = data[1];
+  console.log(projectIndex);
+  const temp = JSON.parse(localStorage.getItem('existingProjects'))[projectIndex].tasks;
+  temp.forEach((task) => {
+    taskContainer.appendChild(taskNode(task.title));
   });
 };
 
@@ -89,4 +102,5 @@ export {
   addTaskHandler,
   addProjectHandler,
   projSwitchHandler,
+  deleteTaskHandler,
 };
